@@ -13,42 +13,38 @@
 #include "Span.hpp"
 
 Span::Span(unsigned int N)
-	: _curr_pos(0), _size(N)
+	: _size(N)
 {
-	if (N = 0)
-	{
-		_integers = NULL;
-		return;
-	}
-	_integers = new int[N]();
+	_integers.reserve(N);
 }
 
 Span::Span(void)
-	: _curr_pos(0), _size(0)
+	: _size(0)
 {
-	_integers = NULL;
 }
 
 Span::Span(const Span& other)
 {
-	if (*this != other)
-		*this = other;
+	*this = other;
 }
 
 Span::~Span(void)
 {
-	delete[] _integers;
 }
 
 void Span::addNumber(int number)
 {
-	if (_curr_pos < _size)
-	{
-		_integers[_curr_pos] = number;
-		++_curr_pos;
-	}
-	else
-		throw std::out_of_range("Max amount of stored values has been reached");
+	if (_integers.size() >= _size)
+		throw std::out_of_range("Max amount of stored values has already been reached");
+	_integers.push_back(number);
+}
+
+template <typename InputIter>
+void Span::addRange(InputIter first, InputIter last)
+{
+	if (std::distance(first, last) > static_cast<long>(_maxSize - _numbers.size()))
+		throw std::out_of_range("Max amount of stored values has alreadt been reached");
+	_integers.insert(_integers.end(), first, last);
 }
 
 void Span::printNumbers(void)
@@ -61,45 +57,39 @@ void Span::printNumbers(void)
 
 int Span::longestSpan(void)
 {
-	int longSpan = 0;
-	if (_integers = NULL)
-		throw emptySpan();
+	if (_size < 2)
+		throw notEnough();
+	return (*std::max_element(_integers.begin(), _integers.end()))
+			- *std::min_element(_integers.begin(), _integers.end());
 }
 
 int Span::shortestSpan(void)
 {
-
+	if (_size < 2)
+		throw notEnough();
+	std::vector<int> sorted(_integers);
+	std::sort(sorted.begin(), sorted.end());
+	std::vector<int> diff(sorted.size());
+	std::adjacent_difference(sorted.begin(), sorted.end(), diff.begin());
+	return (*std::min_element(diff.begin() + 1, diff.end()));
 }
 
 Span& Span::operator=(const Span& other)
 {
 	if (this != &other)
 	{
-		delete[] _integers;
 		_size = other._size;
-		_curr_pos = other._curr_pos;
-		_integers = new int[_size];
-		for (unsigned int i = 0; i < _size; ++i)
-		{
-			_integers[i] = other._integers[i];
-		}
+		_integers = other._integers;
 	}
 	return (*this);
 }
 
-bool Span::operator!=(const Span &other) const
-{
-	if (_size != other._size)
-		return (true);	
-	for (unsigned int i = 0; i < _size; ++i)
-	{
-		if (_integers[i] != other._integers[i])
-			return (true);
-	}
-	return (false);
-}
-
 const char *Span::emptySpan::what() const throw()
 {
-	return ("Span is empty!");
+	return ("Integer array is empty!");
+}
+
+const char *Span::notEnough::what() const throw()
+{
+	return ("Integer array does not contain enough integers");
 }

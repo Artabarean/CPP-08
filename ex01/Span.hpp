@@ -13,6 +13,11 @@
 #include <exception>
 #include <iostream>
 #include <exception>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+#include <numeric>
+
 
 class Span
 {
@@ -21,19 +26,28 @@ class Span
 		Span(void);
 		Span(const Span& other);
 		~Span(void);
+
 		void addNumber(int number);
 		int shortestSpan(void);
 		int longestSpan(void);
 		void printNumbers(void);
 		Span &operator=(const Span& other);
-		bool operator!=(const Span &other) const;
+
+		template <typename InputIter>
+    	void addRange(InputIter first, InputIter last);
+
 		class emptySpan : public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
+
+		class notEnough : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 	private:
-		unsigned int _curr_pos;
-		int *_integers;
+		std::vector<int> _integers;
 		unsigned int _size;
 };
