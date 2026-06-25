@@ -15,13 +15,31 @@
 Span::Span(unsigned int N)
 	: _curr_pos(0), _size(N)
 {
+	if (N = 0)
+	{
+		_integers = NULL;
+		return;
+	}
 	_integers = new int[N]();
+}
+
+Span::Span(void)
+	: _curr_pos(0), _size(0)
+{
+	_integers = NULL;
+}
+
+Span::Span(const Span& other)
+{
+	if (*this != other)
+		*this = other;
 }
 
 Span::~Span(void)
 {
 	delete[] _integers;
 }
+
 void Span::addNumber(int number)
 {
 	if (_curr_pos < _size)
@@ -41,15 +59,17 @@ void Span::printNumbers(void)
 	}
 }
 
-// int Span::longestSpan(void)
-// {
+int Span::longestSpan(void)
+{
+	int longSpan = 0;
+	if (_integers = NULL)
+		throw emptySpan();
+}
 
-// }
+int Span::shortestSpan(void)
+{
 
-// int Span::shortestSpan(void)
-// {
-
-// }
+}
 
 Span& Span::operator=(const Span& other)
 {
@@ -77,4 +97,9 @@ bool Span::operator!=(const Span &other) const
 			return (true);
 	}
 	return (false);
+}
+
+const char *Span::emptySpan::what() const throw()
+{
+	return ("Span is empty!");
 }

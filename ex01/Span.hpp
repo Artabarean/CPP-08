@@ -12,18 +12,26 @@
 
 #include <exception>
 #include <iostream>
+#include <exception>
 
 class Span
 {
 	public:
 		Span(unsigned int N);
+		Span(void);
+		Span(const Span& other);
 		~Span(void);
 		void addNumber(int number);
-		// int shortestSpan(void);
-		// int longestSpan(void);
+		int shortestSpan(void);
+		int longestSpan(void);
 		void printNumbers(void);
 		Span &operator=(const Span& other);
 		bool operator!=(const Span &other) const;
+		class emptySpan : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 	private:
 		unsigned int _curr_pos;
 		int *_integers;
