@@ -1,31 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   MutantStack.tpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 12:31:58 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/26 11:50:59 by atabarea         ###   ########.fr       */
+/*   Created: 2026/06/26 12:04:39 by atabarea          #+#    #+#             */
+/*   Updated: 2026/06/26 12:36:17 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
-
-int main(void)
-{
-	Span intvect(10000);
-	std::vector<int> values(10000, 42);
-	try
-	{
-		intvect.addRange(values.begin(), values.end());
-		intvect.printNumbers();
-		std::cout << intvect.shortestSpan() << std::endl;
-		std::cout << intvect.longestSpan() << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (0);
-}
+#include "MutantStack.hpp"

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 12:31:58 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/26 11:50:59 by atabarea         ###   ########.fr       */
+/*   Created: 2026/06/26 12:04:44 by atabarea          #+#    #+#             */
+/*   Updated: 2026/06/26 12:53:21 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
+#ifndef MUTANTSTACK_HPP
+# define MUTANTSTACK_HPP
 
-int main(void)
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iterator>
+#include <stack>
+
+template <typename T>
+class MutantStack : public std::stack
 {
-	Span intvect(10000);
-	std::vector<int> values(10000, 42);
-	try
-	{
-		intvect.addRange(values.begin(), values.end());
-		intvect.printNumbers();
-		std::cout << intvect.shortestSpan() << std::endl;
-		std::cout << intvect.longestSpan() << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (0);
-}
+	public:
+		typedef __gnu_cxx::__normal_iterator<pointer, vector> iterator;
+	private:
+		
+};
+
+#endif

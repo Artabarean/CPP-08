@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/06/22 11:14:11 by atabarea          #+#    #+#              #
-#    Updated: 2026/06/26 11:19:48 by atabarea         ###   ########.fr        #
+#    Created: 2026/06/26 12:04:47 by atabarea          #+#    #+#              #
+#    Updated: 2026/06/26 12:40:08 by atabarea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= easyfind
+NAME		= Mutant
 CXX			= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 

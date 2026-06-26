@@ -5,27 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 12:31:58 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/26 11:50:59 by atabarea         ###   ########.fr       */
+/*   Created: 2026/06/26 12:04:49 by atabarea          #+#    #+#             */
+/*   Updated: 2026/06/26 12:41:30 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
+#include "MutantStack.hpp"
 
-int main(void)
+int main()
 {
-	Span intvect(10000);
-	std::vector<int> values(10000, 42);
-	try
+	MutantStack<int> mstack;
+	mstack.push(5);
+	mstack.push(17);
+	std::cout << mstack.top() << std::endl;
+	mstack.pop();
+	std::cout << mstack.size() << std::endl;
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	//[...]
+	mstack.push(0);
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
 	{
-		intvect.addRange(values.begin(), values.end());
-		intvect.printNumbers();
-		std::cout << intvect.shortestSpan() << std::endl;
-		std::cout << intvect.longestSpan() << std::endl;
+	std::cout << *it << std::endl;
+	++it;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (0);
+	std::stack<int> s(mstack);
+	return 0;
 }

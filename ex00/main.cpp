@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 11:14:09 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/22 12:26:54 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/26 11:30:08 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	container.push_back(0);
 	try
 	{
-		easyfind(container, 50);
+		easyfind(container, 10);
 		std::cout << "success" << std::endl;
 	}
 	catch(const std::exception& e)

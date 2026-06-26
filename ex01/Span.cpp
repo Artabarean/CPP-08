@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 12:31:56 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/24 11:52:20 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/26 11:46:19 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 Span::Span(unsigned int N)
 	: _size(N)
 {
-	_integers.reserve(N);
 }
 
 Span::Span(void)
@@ -39,26 +38,19 @@ void Span::addNumber(int number)
 	_integers.push_back(number);
 }
 
-template <typename InputIter>
-void Span::addRange(InputIter first, InputIter last)
-{
-	if (std::distance(first, last) > static_cast<long>(_maxSize - _numbers.size()))
-		throw std::out_of_range("Max amount of stored values has alreadt been reached");
-	_integers.insert(_integers.end(), first, last);
-}
-
 void Span::printNumbers(void)
 {
-	for (unsigned int i = 0; i < _size; ++i)
-	{
-		std::cout << _integers[i] << std::endl;
-	}
+	std::vector<int>::const_iterator iter = _integers.begin();
+	for ( ;	iter != _integers.end(); ++iter)
+		std::cout << *iter << std::endl;
 }
 
 int Span::longestSpan(void)
 {
 	if (_size < 2)
 		throw notEnough();
+	if (_integers.empty())
+		throw emptySpan();
 	return (*std::max_element(_integers.begin(), _integers.end()))
 			- *std::min_element(_integers.begin(), _integers.end());
 }
@@ -67,6 +59,8 @@ int Span::shortestSpan(void)
 {
 	if (_size < 2)
 		throw notEnough();
+	if (_integers.empty())
+		throw emptySpan();
 	std::vector<int> sorted(_integers);
 	std::sort(sorted.begin(), sorted.end());
 	std::vector<int> diff(sorted.size());
@@ -86,10 +80,10 @@ Span& Span::operator=(const Span& other)
 
 const char *Span::emptySpan::what() const throw()
 {
-	return ("Integer array is empty!");
+	return ("Span is empty!");
 }
 
 const char *Span::notEnough::what() const throw()
 {
-	return ("Integer array does not contain enough integers");
+	return ("Span does not contain enough integers");
 }
