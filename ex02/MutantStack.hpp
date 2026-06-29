@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 12:04:44 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/26 12:53:21 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:34:39 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@
 #include <stack>
 
 template <typename T>
-class MutantStack : public std::stack
+class MutantStack : public std::stack<T>
 {
 	public:
-		typedef __gnu_cxx::__normal_iterator<pointer, vector> iterator;
-	private:
-		
+		MutantStack();
+		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+		typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+		typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
+		iterator begin();
+		iterator end();
 };
 
+#include "MutantStack.tpp"
 #endif
