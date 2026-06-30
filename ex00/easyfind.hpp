@@ -18,7 +18,7 @@
 #include <algorithm>
 
 template <typename T>
-void easyfind(T& element, int num)
+void easyfind(T element, int num)
 {
 	typename T::iterator found = std::find(element.begin(), element.end(), num);
 	if(found != element.end())
